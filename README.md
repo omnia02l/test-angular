@@ -17,7 +17,7 @@ Application de gestion des demandes : création, liste et mise à jour du statut
 ### 1. Backend Laravel
 
 ```bash
-cd crud-excel-pdf_laravel
+cd test-laravel
 composer install
 copy .env.example .env
 php artisan key:generate
@@ -43,7 +43,7 @@ Sous Windows avec XAMPP : `demarrer-serveur.bat`
 ### 2. Frontend Angular
 
 ```bash
-cd crud-excel-pdf_angular
+cd test-angular
 npm install
 ng serve
 ```
