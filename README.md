@@ -1,27 +1,107 @@
-# Gestion des demandes (Angular)
+# Gestion des demandes
 
-Application Angular pour la gestion des demandes : créer, lister, mettre à jour le statut. Ce projet a été généré avec [Angular CLI](https://github.com/angular/angular-cli).
+Application de gestion des demandes : création, liste et mise à jour du statut. Backend Laravel (API REST) + Frontend Angular.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Étapes pour lancer le projet
 
-## Code scaffolding
+### Prérequis
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **PHP 8.1+** (XAMPP recommandé)
+- **Composer**
+- **Node.js 18+** et npm
+- **MongoDB** (localhost par défaut, port 27017)
+- **Angular CLI 17** : `npm install -g @angular/cli@17`
 
-## Build
+### 1. Backend Laravel
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+cd crud-excel-pdf_laravel
+composer install
+copy .env.example .env
+php artisan key:generate
+```
 
-## Running unit tests
+Configurer MongoDB dans `.env` :
+```env
+DB_CONNECTION=mongodb
+MONGODB_HOST=127.0.0.1
+MONGODB_PORT=27017
+MONGODB_DATABASE=crud-excel-pdf
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Lancer le serveur :
+```bash
+php artisan serve
+```
 
-## Running end-to-end tests
+L’API est disponible sur `http://127.0.0.1:8000/api`.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Sous Windows avec XAMPP : `demarrer-serveur.bat`
 
-## Further help
+### 2. Frontend Angular
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+cd crud-excel-pdf_angular
+npm install
+ng serve
+```
+
+L’application est disponible sur `http://localhost:4200`.
+
+### 3. Vérification
+
+- MongoDB doit être en cours d’exécution.
+- Le frontend doit être configuré pour appeler `http://127.0.0.1:8000/api` (défini dans `src/app/core/env.ts`).
+
+---
+
+## Choix techniques
+
+### Backend (Laravel)
+
+| Choix | Justification |
+|-------|---------------|
+| **Laravel 10** | Framework PHP adapté aux API REST. |
+| **MongoDB** (jenssegers/mongodb) | Stockage NoSQL, collections `demandes` sans migrations SQL. |
+| **Form Requests** | Validation côté serveur (`StoreDemandeRequest`, `UpdateDemandeStatusRequest`). |
+| **API REST JSON** | Réponses JSON, sans authentification pour simplifier. |
+
+### Frontend (Angular)
+
+| Choix | Justification |
+|-------|---------------|
+| **Angular 17** | SPA avec routing, composants standalone. |
+| **Reactive Forms** | Validation sur le formulaire de création. |
+| **HttpClient** | Appels HTTP vers l’API Laravel. |
+| **Composants standalone** | Pas de NgModule, structure légère. |
+
+### Entité Demande
+
+- **titre** : obligatoire, max 255 caractères
+- **description** : optionnelle, max 5000 caractères
+- **statut** : `new` ou `approved` (défaut : `new`)
+
+---
+
+## Limites du travail réalisé
+
+1. **Pas d’authentification** : L’API est ouverte.
+2. **Pas de pagination** : Toutes les demandes sont chargées d’un coup.
+3. **Pas de recherche, tri ou filtre** : Liste brute uniquement.
+4. **MongoDB abandonné** : Le package `jenssegers/mongodb` est déprécié ; migration vers `mongodb/laravel-mongodb` recommandée.
+5. **Pas de tests** : Pas de tests unitaires ou fonctionnels.
+
+
+---
+
+## Améliorations possibles
+
+- **Authentification** : Laravel Sanctum pour sécuriser l’API.
+- **Pagination** : Pagination côté Laravel + UI côté Angular.
+- **Recherche / filtres** : Recherche sur titre/description, filtre par statut.
+
+- **Gestion d’erreurs** : Intercepteur HTTP global, messages plus explicites.
+- **Validation des erreurs API** : Affichage des erreurs de validation Laravel par champ.
+
