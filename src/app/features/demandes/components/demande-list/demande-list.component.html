@@ -1,0 +1,33 @@
+<div class="page">
+  <div class="header">
+    <h1>Demandes</h1>
+    <a routerLink="/demandes/new" class="btn">Nouvelle demande</a>
+  </div>
+
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+  @if (loading) {
+    <p>Chargement…</p>
+  } @else {
+    <ul class="list">
+      @for (d of demandes; track d._id) {
+        <li>
+          <span class="titre">{{ d.titre }}</span>
+          <select
+            [ngModel]="d.statut"
+            (ngModelChange)="onStatutChange(d, $event)"
+            [disabled]="updatingStatusId === d._id"
+            class="statut"
+          >
+            <option value="new">New</option>
+            <option value="approved">Approved</option>
+          </select>
+        </li>
+      }
+    </ul>
+    @if (demandes.length === 0) {
+      <p class="empty">Aucune demande.</p>
+    }
+  }
+</div>

@@ -1,0 +1,46 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid #eee;
+  background: #fafafa;
+}
+
+.nav a {
+  color: var(--primary, #333);
+  text-decoration: none;
+  font-size: 0.9375rem;
+}
+
+.nav a.brand {
+  font-weight: 600;
+  margin-right: auto;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+.nav .logout {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.875rem;
+  background: transparent;
+  border: 1px solid #999;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.nav .logout:hover {
+  background: #eee;
+}
+
+main {
+  flex: 1;
+}

@@ -1,0 +1,27 @@
+<div class="page">
+  <a routerLink="/demandes" class="back">← Retour</a>
+  <h1>Nouvelle demande</h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    @if (error) {
+      <p class="error">{{ error }}</p>
+    }
+    <div class="field">
+      <label for="titre">Titre *</label>
+      <input id="titre" type="text" formControlName="titre" />
+      @if (form.get('titre')?.invalid && form.get('titre')?.touched) {
+        <span class="field-error">{{ getTitreError() }}</span>
+      }
+    </div>
+    <div class="field">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" rows="4"></textarea>
+      @if (form.get('description')?.invalid && form.get('description')?.touched) {
+        <span class="field-error">Description : max 5000 caractères.</span>
+      }
+    </div>
+    <button type="submit" [disabled]="saving || form.invalid">
+      {{ saving ? 'Création…' : 'Créer' }}
+    </button>
+  </form>
+</div>

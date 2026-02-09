@@ -1,0 +1,66 @@
+.page {
+  padding: 1.5rem;
+  max-width: 600px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.btn {
+  padding: 0.4rem 0.75rem;
+  background: #333;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.error {
+  color: #c00;
+  font-size: 0.875rem;
+  margin: 0 0 1rem;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.titre {
+  font-size: 0.9375rem;
+}
+
+.statut {
+  padding: 0.3rem 0.5rem;
+  font-size: 0.875rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.statut:disabled {
+  opacity: 0.6;
+}
+
+.empty {
+  color: #666;
+  font-size: 0.9375rem;
+  margin: 1rem 0;
+}
